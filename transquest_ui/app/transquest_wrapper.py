@@ -87,7 +87,6 @@ class MicroTransQuestWrapper:
                 word_index += 1
                 target_predicted_tokens.append(target_predicted_token)
 
-
         return source_predicted_tokens, target_predicted_tokens
 
 
