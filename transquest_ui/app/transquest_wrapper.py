@@ -67,7 +67,13 @@ class MicroTransQuestWrapper:
         source_words = source.split()
         target_words = target.split()
 
+        logging.info(source_words)
+        logging.info(target_words)
+
         source_tags, target_tags = self.model.predict([[source, target]])
+
+        logging.info(source_tags)
+        logging.info(target_tags)
 
         source_predicted_tokens = []
         target_predicted_tokens = []
