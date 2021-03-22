@@ -13,7 +13,7 @@ class PredictedToken:
 
 
 class MicroTransQuestWrapper:
-    def __init__(self, model_name_or_path, model_type=None,  use_cuda=True,  cuda_device=-1):
+    def __init__(self, model_name_or_path, model_type=None, use_cuda=True, cuda_device=-1):
 
         self.model_name_or_path = model_name_or_path
         self.model_type = model_type
@@ -45,17 +45,21 @@ class MicroTransQuestWrapper:
                                                     dest_path=os.path.join(self.model_path, "model.zip"),
                                                     showsize=True, unzip=True)
 
-            self.model = MicroTransQuestModel(self.trained_model_type, self.model_path, use_cuda=self.use_cuda,
-                                        cuda_device=self.cuda_device)
+            model_args = {"use_multiprocessing": False}
+            self.model = MicroTransQuestModel(self.trained_model_type, self.model_path, args=model_args,
+                                              use_cuda=self.use_cuda,
+                                              cuda_device=self.cuda_device)
 
         else:
-            self.model = MicroTransQuestModel(model_type, self.model_name_or_path, use_cuda=self.use_cuda,
-                                        cuda_device=self.cuda_device)
+            model_args = {"use_multiprocessing": False}
+            self.model = MicroTransQuestModel(model_type, self.model_name_or_path, args=model_args,
+                                              use_cuda=self.use_cuda,
+                                              cuda_device=self.cuda_device)
 
     @staticmethod
     def _download(drive_id, model_name):
         gdd.download_file_from_google_drive(file_id=drive_id,
-                                            dest_path= os.path.join(".transquest", model_name, "model.zip"),
+                                            dest_path=os.path.join(".transquest", model_name, "model.zip"),
                                             unzip=True)
 
     def predict_quality(self, source: str, target: str):
@@ -88,7 +92,7 @@ class MicroTransQuestWrapper:
 
 
 class MonoTransQuestWrapper:
-    def __init__(self, model_name_or_path, model_type=None,  use_cuda=True,  cuda_device=-1):
+    def __init__(self, model_name_or_path, model_type=None, use_cuda=True, cuda_device=-1):
 
         self.model_name_or_path = model_name_or_path
         self.model_type = model_type
@@ -120,17 +124,21 @@ class MonoTransQuestWrapper:
                                                     dest_path=os.path.join(self.model_path, "model.zip"),
                                                     showsize=True, unzip=True)
 
-            self.model = MonoTransQuestModel(self.trained_model_type, self.model_path, use_cuda=self.use_cuda,
-                                        cuda_device=self.cuda_device)
+            model_args = {"use_multiprocessing": False}
+            self.model = MonoTransQuestModel(self.trained_model_type, self.model_path, args=model_args,
+                                             use_cuda=self.use_cuda,
+                                             cuda_device=self.cuda_device)
 
         else:
-            self.model = MonoTransQuestModel(model_type, self.model_name_or_path, use_cuda=self.use_cuda,
-                                        cuda_device=self.cuda_device)
+            model_args = {"use_multiprocessing": False}
+            self.model = MonoTransQuestModel(model_type, self.model_name_or_path, args=model_args,
+                                             use_cuda=self.use_cuda,
+                                             cuda_device=self.cuda_device)
 
     @staticmethod
     def _download(drive_id, model_name):
         gdd.download_file_from_google_drive(file_id=drive_id,
-                                            dest_path= os.path.join(".transquest", model_name, "model.zip"),
+                                            dest_path=os.path.join(".transquest", model_name, "model.zip"),
                                             unzip=True)
 
     def predict_quality(self, source: str, target: str):
