@@ -60,6 +60,7 @@ class MicroTransQuestWrapper:
 
     def predict_quality(self, source: str, target: str):
 
+        print(source, target)
         source_words = source.split()
         target_words = target.split()
 

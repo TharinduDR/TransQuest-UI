@@ -4,8 +4,8 @@ from annotated_text import annotated_text
 from transquest_ui.app.transquest_wrapper import MicroTransQuestWrapper, MonoTransQuestWrapper
 
 en_de_word = MicroTransQuestWrapper("en_de",  use_cuda=False)
-en_de_hter = MonoTransQuestWrapper("en_de_hter", use_cuda=False)
-en_de_da = MonoTransQuestWrapper("en_de_da", use_cuda=False)
+# en_de_hter = MonoTransQuestWrapper("en_de_hter", use_cuda=False)
+# en_de_da = MonoTransQuestWrapper("en_de_da", use_cuda=False)
 
 
 def quality_to_rgb(quality: str):
@@ -18,7 +18,7 @@ def quality_to_rgb(quality: str):
 def get_model(language: str):
 
     if language == "en-de":
-        return en_de_word, en_de_hter, en_de_da
+        return en_de_word, None, None
 
     else:
         return None, None, None
