@@ -4,8 +4,8 @@ from annotated_text import annotated_text
 from transquest_ui.app.transquest_wrapper import MicroTransQuestWrapper, MonoTransQuestWrapper
 
 en_de_word = MicroTransQuestWrapper("en_de",  use_cuda=False)
-# en_de_hter = MonoTransQuestWrapper("en_de_hter", use_cuda=False)
-# en_de_da = MonoTransQuestWrapper("en_de_da", use_cuda=False)
+en_de_hter = MonoTransQuestWrapper("en_de_hter", use_cuda=False)
+en_de_da = MonoTransQuestWrapper("en_de_da", use_cuda=False)
 
 
 def quality_to_rgb(quality: str):
@@ -18,7 +18,7 @@ def quality_to_rgb(quality: str):
 def get_model(language: str):
 
     if language == "en-de":
-        return en_de_word, None, None
+        return en_de_word, en_de_hter, en_de_da
 
     else:
         return None, None, None
@@ -59,15 +59,14 @@ def main():
     with col2:
         target_text = st.text_area('Target', value="Herzlich willkommen")
 
-    # hter_value = hter_model.predict_quality(source_text, target_text)
-    # # da_value = da_model.predict_quality(source_text, target_text)
+    hter_value = hter_model.predict_quality(source_text, target_text)
+    da_value = da_model.predict_quality(source_text, target_text)
     source_tags, target_tags = word_model.predict_quality(source_text, target_text)
-
 
     st.header('Translation Quality')
 
-    st.write('Target sentence fixing effort (HTER): ', 0.89)
-    st.write('Direct Assesement: ', 0,70)
+    st.write('Target sentence fixing effort (HTER): ',hter_value)
+    st.write('Direct Assesement: ', da_value)
 
     source_predictions, target_predictions = st.beta_columns(2)
     with source_predictions:
