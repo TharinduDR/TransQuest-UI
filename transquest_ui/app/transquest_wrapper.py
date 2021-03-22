@@ -64,6 +64,7 @@ class MicroTransQuestWrapper:
         target_words = target.split()
 
         source_tags, target_tags = self.model.predict([[source, target]])
+        print(source_tags, target_tags)
 
         source_predicted_tokens = []
         target_predicted_tokens = []
