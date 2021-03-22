@@ -71,13 +71,13 @@ class MicroTransQuestWrapper:
 
         source_predicted_tokens = []
         target_predicted_tokens = []
-        for source_word, source_tag in zip(source_words, source_tags):
+        for source_word, source_tag in zip(source_words, source_tags[0]):
             source_predicted_token = PredictedToken(source_word, source_tag)
             source_predicted_tokens.append(source_predicted_token)
 
         gap_index = 0
         word_index = 0
-        for prediction_id, prediction in enumerate(target_tags):
+        for prediction_id, prediction in enumerate(target_tags[0]):
             if prediction_id % 2 == 0:
                 target_predicted_token = PredictedToken("<GAP>", prediction)
                 gap_index += 1

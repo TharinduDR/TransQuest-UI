@@ -1,3 +1,5 @@
+import logging
+
 import streamlit as st
 from annotated_text import annotated_text
 
@@ -63,10 +65,13 @@ def main():
     da_value = da_model.predict_quality(source_text, target_text)
     source_tags, target_tags = word_model.predict_quality(source_text, target_text)
 
+    logging.info(hter_value)
+    logging.info(da_value)
+
     st.header('Translation Quality')
 
-    st.write('Target sentence fixing effort (HTER): ',hter_value)
-    st.write('Direct Assesement: ', da_value)
+    st.write('Target sentence fixing effort (HTER): ', str(hter_value))
+    st.write('Direct Assesement: ', str(da_value))
 
     source_predictions, target_predictions = st.beta_columns(2)
     with source_predictions:
