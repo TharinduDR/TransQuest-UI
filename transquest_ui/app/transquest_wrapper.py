@@ -64,12 +64,10 @@ class MicroTransQuestWrapper:
 
     def predict_quality(self, source: str, target: str):
 
-        print(source, target)
         source_words = source.split()
         target_words = target.split()
 
         source_tags, target_tags = self.model.predict([[source, target]])
-        print(source_tags, target_tags)
 
         source_predicted_tokens = []
         target_predicted_tokens = []
@@ -83,10 +81,12 @@ class MicroTransQuestWrapper:
             if prediction_id % 2 == 0:
                 target_predicted_token = PredictedToken("<GAP>", prediction)
                 gap_index += 1
+                target_predicted_tokens.append(target_predicted_token)
             else:
                 target_predicted_token = PredictedToken(target_words[word_index], prediction)
                 word_index += 1
-            target_predicted_tokens.append(target_predicted_token)
+                target_predicted_tokens.append(target_predicted_token)
+
 
         return source_predicted_tokens, target_predicted_tokens
 
