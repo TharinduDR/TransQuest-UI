@@ -21,8 +21,8 @@ class MicroTransQuestWrapper:
         self.cuda_device = cuda_device
 
         MODEL_CONFIG = {
-            "en_de": ("xlmroberta", "1-_n72Fovt2tPE2UZ_25JWvSmsSE9K6EZ"),
-            "en_zh": ("xlmroberta", "1-_n72Fovt2tPE2UZ_25JWvSmsSE9K6EZ"),
+            "en_de": ("xlmroberta", "108feANZ_VTaAjJMwR85DPzzN6TLdLjvd"),
+            "en_zh": ("xlmroberta", "108feANZ_VTaAjJMwR85DPzzN6TLdLjvd"),
         }
 
         if model_name_or_path in MODEL_CONFIG:
@@ -94,8 +94,8 @@ class MonoTransQuestWrapper:
         self.cuda_device = cuda_device
 
         MODEL_CONFIG = {
-            "en_de": ("xlmroberta", "1-_n72Fovt2tPE2UZ_25JWvSmsSE9K6EZ"),
-            "en_zh": ("xlmroberta", "1-_n72Fovt2tPE2UZ_25JWvSmsSE9K6EZ"),
+            "en_de_hter": ("xlmroberta", "1YYL2qCtceHa1ufrLwF-iBlrYugAF2lE1"),
+            "en_de_da": ("xlmroberta", "1byzONzC1t1Qc0m76c4TOEGvC0yMBWnMU"),
         }
 
         if model_name_or_path in MODEL_CONFIG:
