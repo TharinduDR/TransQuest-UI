@@ -2,21 +2,24 @@ import logging
 
 import streamlit as st
 from annotated_text import annotated_text
-
-from transquest_ui.app.transquest_wrapper import MicroTransQuestWrapper, MonoTransQuestWrapper
-
-en_de_word = MicroTransQuestWrapper("en_de",  use_cuda=False)
-en_de_hter = MonoTransQuestWrapper("en_de_hter", use_cuda=False)
-en_de_da = MonoTransQuestWrapper("en_de_da", use_cuda=False)
+from transquest.algo.sentence_level.monotransquest.run_model import MonoTransQuestModel
+from transquest.algo.word_level.microtransquest.run_model import MicroTransQuestModel
 
 
-en_zh_word = MicroTransQuestWrapper("en_zh",  use_cuda=False)
-en_zh_hter = MonoTransQuestWrapper("en_zh_hter", use_cuda=False)
-en_zh_da = MonoTransQuestWrapper("en_zh_da", use_cuda=False)
+model_args = {"use_multiprocessing": False}
 
-multilingual = MicroTransQuestWrapper("en_zh",  use_cuda=False)
-multilingual_hter = MonoTransQuestWrapper("en_zh_hter", use_cuda=False)
-multilingual_da = MonoTransQuestWrapper("en_zh_hter", use_cuda=False)
+en_de_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_de-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
+en_de_hter = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-hter-en_de-wiki", args=model_args, num_labels=1, use_cuda=False)
+en_de_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_de-wiki", args=model_args, num_labels=1, use_cuda=False)
+
+
+en_zh_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
+en_zh_hter = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-hter-en_zh-wiki", args=model_args, num_labels=1, use_cuda=False)
+en_zh_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_zh-wiki", args=model_args, num_labels=1, use_cuda=False)
+
+multilingual = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
+multilingual_hter = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-hter-en_zh-wiki", args=model_args, num_labels=1, use_cuda=False)
+multilingual_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-multilingual", args=model_args, num_labels=1, use_cuda=False)
 
 
 def quality_to_rgb(quality: str):
