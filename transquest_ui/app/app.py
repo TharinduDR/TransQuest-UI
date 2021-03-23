@@ -89,9 +89,9 @@ def main():
         else:
             target_text = st.text_area('Target', value="Welcome")
 
-    hter_value = hter_model.predict_quality(source_text, target_text)
-    da_value = da_model.predict_quality(source_text, target_text)
-    source_tags, target_tags = word_model.predict_quality(source_text, target_text)
+    hter_value = hter_model.predict(source_text, target_text)
+    da_value = da_model.predict(source_text, target_text)
+    source_tags, target_tags = word_model.predict(source_text, target_text)
 
     hter_value = float(str(hter_value))
     da_value = float(str(da_value))
