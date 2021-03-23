@@ -5,11 +5,12 @@ from annotated_text import annotated_text
 from transquest.algo.sentence_level.monotransquest.run_model import MonoTransQuestModel
 from transquest.algo.word_level.microtransquest.run_model import MicroTransQuestModel
 
+from transquest_ui.app.args import microtransquest_config, monotransquest_config
 
 model_args = {"use_multiprocessing": False}
 
-en_de_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_de-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
-en_de_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_de-wiki", args=model_args, num_labels=1, use_cuda=False)
+en_de_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_de-wiki", args=microtransquest_config, labels=["OK", "BAD"], use_cuda=False)
+en_de_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_de-wiki", args=monotransquest_config, num_labels=1, use_cuda=False)
 
 
 # en_zh_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
