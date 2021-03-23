@@ -12,11 +12,11 @@ en_de_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_d
 en_de_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_de-wiki", args=model_args, num_labels=1, use_cuda=False)
 
 
-en_zh_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
-en_zh_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_zh-wiki", args=model_args, num_labels=1, use_cuda=False)
-
-multilingual = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
-multilingual_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-multilingual", args=model_args, num_labels=1, use_cuda=False)
+# en_zh_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
+# en_zh_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-en_zh-wiki", args=model_args, num_labels=1, use_cuda=False)
+#
+# multilingual = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_zh-wiki", args=model_args, labels=["OK", "BAD"], use_cuda=False)
+# multilingual_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-multilingual", args=model_args, num_labels=1, use_cuda=False)
 
 logging.info("Finished loading models")
 
@@ -33,11 +33,11 @@ def get_model(language: str):
     if language == "en-de":
         return en_de_word, en_de_da
 
-    elif language == "en-zh":
-        return en_zh_word, en_zh_da
-
-    elif language == "multilingual":
-        return multilingual, multilingual_da
+    # elif language == "en-zh":
+    #     return en_zh_word, en_zh_da
+    #
+    # elif language == "multilingual":
+    #     return multilingual, multilingual_da
 
     else:
         return None, None, None
