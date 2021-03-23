@@ -14,9 +14,9 @@ en_zh_word = MicroTransQuestWrapper("en_zh",  use_cuda=False)
 en_zh_hter = MonoTransQuestWrapper("en_zh_hter", use_cuda=False)
 en_zh_da = MonoTransQuestWrapper("en_zh_da", use_cuda=False)
 
-multilingual = MicroTransQuestWrapper("multilingual",  use_cuda=False)
-multilingual_hter = MonoTransQuestWrapper("multilingual_hter", use_cuda=False)
-multilingual_da = MonoTransQuestWrapper("multilingual_da", use_cuda=False)
+multilingual = MicroTransQuestWrapper("en_zh",  use_cuda=False)
+multilingual_hter = MonoTransQuestWrapper("en_zh_hter", use_cuda=False)
+multilingual_da = MonoTransQuestWrapper("en_zh_hter", use_cuda=False)
 
 
 def quality_to_rgb(quality: str):
