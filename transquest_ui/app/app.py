@@ -89,8 +89,8 @@ def main():
         else:
             target_text = st.text_area('Target', value="Welcome")
 
-    da_value = da_model.predict(source_text, target_text)
-    source_tags, target_tags = word_model.predict(source_text, target_text)
+    da_value = da_model.predict([[source_text, target_text]])
+    source_tags, target_tags = word_model.predict([[source_text, target_text]])
 
     da_value = float(str(da_value))
 
