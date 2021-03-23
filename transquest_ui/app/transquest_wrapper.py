@@ -21,8 +21,9 @@ class MicroTransQuestWrapper:
         self.cuda_device = cuda_device
 
         MODEL_CONFIG = {
-            "en_de": ("xlmroberta", "108feANZ_VTaAjJMwR85DPzzN6TLdLjvd"),
-            "en_zh": ("xlmroberta", "108feANZ_VTaAjJMwR85DPzzN6TLdLjvd"),
+            "en_de": ("xlmroberta", "1uAsfBXhABLYeFCeuBpHH7P75X-BhXuet"),
+            "en_zh": ("xlmroberta", "1-hHgaKXQN7Vmhtb5YDSgslk1wewNrRPW"),
+            "multilingual": ("xlmroberta", "108oA7TtxYskNyuD2TVit58jwA4A7rMJv"),
         }
 
         if model_name_or_path in MODEL_CONFIG:
@@ -85,13 +86,13 @@ class MicroTransQuestWrapper:
         word_index = 0
         for prediction_id, prediction in enumerate(target_tags[0]):
             if prediction_id % 2 == 0:
-                target_predicted_token = PredictedToken("<GAP>", prediction)
-                gap_index += 1
+                target_predicted_token = PredictedToken("[GAP]", prediction)
                 target_predicted_tokens.append(target_predicted_token)
+                gap_index += 1
             else:
                 target_predicted_token = PredictedToken(target_words[word_index], prediction)
-                word_index += 1
                 target_predicted_tokens.append(target_predicted_token)
+                gap_index += 1
 
         return source_predicted_tokens, target_predicted_tokens
 
@@ -107,6 +108,10 @@ class MonoTransQuestWrapper:
         MODEL_CONFIG = {
             "en_de_hter": ("xlmroberta", "1YYL2qCtceHa1ufrLwF-iBlrYugAF2lE1"),
             "en_de_da": ("xlmroberta", "1byzONzC1t1Qc0m76c4TOEGvC0yMBWnMU"),
+            "en_zh_hter": ("xlmroberta", "1zTW3zyI2XEbO_hgV22H-1hyDHXwygwqm"),
+            "en_zh_da": ("xlmroberta", "1-o_wPa0q3yQT2Da83PBAlIvBWOfhk0IJ"),
+            "multilingual_hter": ("xlmroberta", "1-8v7Y7JNBEhJw0O9hCcOJsHUHwqFM8Dy"),
+            "multilingual_da": ("xlmroberta", "1-vgHOwqMSe1N558ZQu18W-lsB2TMmtvs"),
         }
 
         if model_name_or_path in MODEL_CONFIG:
