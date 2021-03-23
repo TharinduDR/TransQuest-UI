@@ -118,7 +118,7 @@ def main():
             (token.text, "", quality_to_rgb(token.quality))
             for token in source_tags
             ]
-        st.write('Predicted Source Tags (BAD quality words in Red)')
+        st.write('Predicted Source Quality (BAD quality words in Red)')
         annotated_text(*text)
 
     with target_side:
@@ -126,7 +126,7 @@ def main():
             (token.text, "", quality_to_rgb(token.quality))
             for token in target_tags
             ]
-        st.write('Predicted Target Tags (BAD quality words and gaps in Red)')
+        st.write('Predicted Target Quality (BAD quality words and gaps in Red)')
         annotated_text(*text)
 
 
