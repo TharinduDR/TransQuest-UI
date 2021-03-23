@@ -21,6 +21,8 @@ multilingual = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en
 multilingual_hter = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-hter-en_zh-wiki", args=model_args, num_labels=1, use_cuda=False)
 multilingual_da = MonoTransQuestModel("xlmroberta", "TransQuest/monotransquest-da-multilingual", args=model_args, num_labels=1, use_cuda=False)
 
+logging.info("Finished loading models")
+
 
 def quality_to_rgb(quality: str):
     if quality == "BAD":
