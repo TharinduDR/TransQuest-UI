@@ -7,6 +7,13 @@ from transquest.algo.word_level.microtransquest.run_model import MicroTransQuest
 
 from transquest_ui.app.args import microtransquest_config, monotransquest_config
 
+
+class PredictedToken:
+    def __init__(self, text, quality):
+        self.text = text
+        self.quality = quality
+
+
 model_args = {"use_multiprocessing": False}
 
 en_de_word = MicroTransQuestModel("xlmroberta", "TransQuest/microtransquest-en_de-wiki", args=microtransquest_config, labels=["OK", "BAD"], use_cuda=False)
@@ -89,8 +96,28 @@ def main():
         else:
             target_text = st.text_area('Target', value="Welcome")
 
-    da_value = da_model.predict([[source_text, target_text]])
+    da_value, raw_outputs = da_model.predict([[source_text, target_text]])
     source_tags, target_tags = word_model.predict([[source_text, target_text]])
+
+    source_words = source_text.split()
+    target_words = target_text.split()
+
+    source_predicted_tokens = []
+    target_predicted_tokens = []
+    for source_word, source_tag in zip(source_words, source_tags[0]):
+        source_predicted_token = PredictedToken(source_word, source_tag)
+        source_predicted_tokens.append(source_predicted_token)
+    gap_index = 0
+    word_index = 0
+    for prediction_id, prediction in enumerate(target_tags[0]):
+        if prediction_id % 2 == 0:
+            target_predicted_token = PredictedToken("<GAP>", prediction)
+            gap_index += 1
+            target_predicted_tokens.append(target_predicted_token)
+        else:
+            target_predicted_token = PredictedToken(target_words[word_index], prediction)
+            word_index += 1
+            target_predicted_tokens.append(target_predicted_token)
 
     da_value = float(str(da_value))
 
@@ -114,7 +141,7 @@ def main():
     with source_side:
         text = [
             (token.text, "", quality_to_rgb(token.quality))
-            for token in source_tags
+            for token in source_predicted_tokens
             ]
         st.write('Predicted Source Quality (BAD quality words in Red)')
         annotated_text(*text)
@@ -122,7 +149,7 @@ def main():
     with target_side:
         text = [
             (token.text, "", quality_to_rgb(token.quality))
-            for token in target_tags
+            for token in target_predicted_tokens
             ]
         st.write('Predicted Target Quality (BAD quality words and gaps in Red)')
         annotated_text(*text)
