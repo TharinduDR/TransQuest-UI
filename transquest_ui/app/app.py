@@ -31,7 +31,7 @@ logging.info("Finished loading models")
 
 def quality_to_rgb(quality: str):
     if quality == "BAD":
-        return "rgb(255, 204, 203)"
+        return "rgb(255, 0, 0)"
     else:
         return "rgb(211,211,211)"
 
