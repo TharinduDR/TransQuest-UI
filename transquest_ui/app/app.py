@@ -129,9 +129,6 @@ def main():
 
     st.write('Direct Assesement: ', str(da_value))
 
-    for token in target_tags:
-        logging.info(token.text)
-
     source_predictions, target_predictions = st.beta_columns(2)
     with source_predictions:
         source_side = st.beta_container()
